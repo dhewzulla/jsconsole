@@ -76,7 +76,7 @@ function getRemoteScript() {
 }
 
 var last = getRemoteScript();
-
+try{
 var lastSrc = last.getAttribute('src'),
     id = lastSrc.replace(/.*\?/, ''),
     protocol = /https?:\/\//.exec(lastSrc)[0],
@@ -84,7 +84,16 @@ var lastSrc = last.getAttribute('src'),
     remoteWindow = null,
     queue = [],
     msgType = '';
-
+}
+catch(error){
+  console.log("::::::"+last.getAttribute('src'));
+    id = lastSrc.replace(/.*\?/, ''),
+    protocol = "https",
+    origin = "https://iterativesolution.co.uk",
+    remoteWindow = null,
+    queue = [],
+    msgType = '';
+}
 var remoteFrame = document.createElement('iframe');
 remoteFrame.style.display = 'none';
 remoteFrame.src = origin + '/remote.html?' + id;
